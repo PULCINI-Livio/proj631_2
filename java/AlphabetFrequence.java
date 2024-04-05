@@ -1,8 +1,7 @@
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,16 +11,14 @@ public class AlphabetFrequence {
     protected ArrayList<String> choppedTxtList;
     protected ArrayList<String> txtList;
     protected ArrayList<Integer> freqList;
-    protected HashMap<String, Integer> dicoFreq;
-    
+    protected LinkedHashMap<String, Integer> dicoFreq;
 
     public AlphabetFrequence(String txt){
         this.txt = txt;
         this.choppedTxtList = new ArrayList<String>();
         this.txtList = new ArrayList<String>();
         this.freqList = new ArrayList<Integer>();
-        this.dicoFreq = new HashMap<String, Integer>();
-        
+        this.dicoFreq = new LinkedHashMap<String, Integer>();
     }
     
     //Getters and Setters
@@ -96,17 +93,19 @@ public class AlphabetFrequence {
         for (int i = 0; i < txtList.size(); i++){
             dicoFreq.put(txtList.get(i),freqList.get(i));
         }
-        
+
         List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(dicoFreq.entrySet());
         Collections.sort(list, new ValueThenKeyComparator<String, Integer>());
-        
-        dicoFreq = new HashMap<String, Integer>();
+
+        // créer un nouveau dictionnaire vide
+        LinkedHashMap<String, Integer> newDicoFreq = new LinkedHashMap<String, Integer>();
+
+        // parcourir la liste triée et ajouter les entrées dans l'ordre souhaité au nouveau dictionnaire
         for (Map.Entry<String, Integer> entry : list) {
-            dicoFreq.put(entry.getKey(),entry.getValue());
+            newDicoFreq.put(entry.getKey(), entry.getValue());
         }
 
+        // remplacer l'ancien dictionnaire par le nouveau dictionnaire trié
+        dicoFreq = newDicoFreq;
     }
-
-    
-    //tu met ca dans un troisieme tableau
 }
