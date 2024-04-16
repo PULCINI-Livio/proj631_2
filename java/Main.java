@@ -17,5 +17,7 @@ public class Main {
         alpha.createDicoFreq();
         System.out.println(alpha.dicoFreq);
    
+        ConstructionArbre huffman = new ConstructionArbre(alpha.dicoFreq);
+        System.out.println(huffman.listeFeuilles);
     }
 }

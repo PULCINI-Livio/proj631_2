@@ -7,11 +7,11 @@ import java.util.Map;
 import java.util.Set;
 
 public class AlphabetFrequence {
-    protected String txt;
-    protected ArrayList<String> choppedTxtList;
-    protected ArrayList<String> txtList;
-    protected ArrayList<Integer> freqList;
-    protected LinkedHashMap<String, Integer> dicoFreq;
+    protected String txt;                               // ~ 'bonjour'
+    protected ArrayList<String> choppedTxtList;         // ~ ['b','o','n','j','o','u','r']
+    protected ArrayList<String> txtList;                // ~ ['b','o','n','j','u','r']
+    protected ArrayList<Integer> freqList;              // ~ [ 1 , 2 , 1 , 1 , 1 , 1 ]
+    protected LinkedHashMap<String, Integer> dicoFreq;  // ~ {b=1,j=1,n=1,r=1,u=1,o=2,}
 
     public AlphabetFrequence(String txt){
         this.txt = txt;
