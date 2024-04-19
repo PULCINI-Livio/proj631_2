@@ -6,11 +6,23 @@ public class ConstructionArbre {
     protected LinkedHashMap<String, Integer> dicoFreq;
     protected ArrayList<Arbre> listeArbres;
     protected Arbre arbreHuffman;
+    protected LinkedHashMap<String, String> dicoCodeBinaire;
+    
+
 
     public ConstructionArbre(LinkedHashMap<String, Integer> dicoFreq) {
         this.dicoFreq = dicoFreq;
         this.listeArbres = new ArrayList<Arbre>();
         creerListeArbres();
+        this.dicoCodeBinaire = new LinkedHashMap<String, String>();
+        initDicoCodeBinaire();
+    }
+
+    public void initDicoCodeBinaire() { 
+        for (Map.Entry<String, Integer> entry : dicoFreq.entrySet()) {
+            String key = entry.getKey();
+            dicoCodeBinaire.put(key, null);
+        }
     }
 
     public LinkedHashMap<String, Integer> getDicoFreq() {
@@ -40,25 +52,17 @@ public class ConstructionArbre {
 
     public void construireArbre() {
         if (listeArbres.size() == 1) { // si il ne reste plus que la racine dans la liste d'arbre
-            System.out.println("bonjour");
+            //System.out.println("bonjour");
             arbreHuffman = listeArbres.get(0);
             
         } else {
-            System.out.println("liste freq=");
-            for (Arbre arbre:listeArbres){
-                //System.out.println(arbre.car);
-                System.out.println(arbre.freq);
+            for (Arbre arbre:listeArbres){   
             }
-            
-            System.out.println("Taille liste arbre");
-            System.out.println(listeArbres.size());
             Arbre first = listeArbres.get(0);
             Arbre second = listeArbres.get(1);
 
             int sommeFreq = first.freq + second.freq;
-            System.out.println("sommeFreq=");
-            System.out.println(sommeFreq);
-
+            
             Arbre newTree = new Arbre(sommeFreq, first, second);
             ajouterArbreDansListeArbres(newTree);
             listeArbres.remove(first);
@@ -87,4 +91,21 @@ public class ConstructionArbre {
             i++;
         }
     }
+
+
+    /*def codeBinaire(arbre, dico, code=""):
+        if arbre.estFeuille():
+            dico[arbre.getCaractere()] = code
+        else :
+            codeBinaire(arbre.getGauche(), dico, code + "0")
+            codeBinaire(arbre.getDroite(), dico, code + "1")   */
+    
+    public void creerCodeBinaire(Arbre arbre, String code) {
+        if (arbre.estFeuille()) {
+            dicoCodeBinaire.put(arbre.car, code);
+        } else {
+            creerCodeBinaire(arbre.filsGauche, code + "0");
+            creerCodeBinaire(arbre.filsDroit, code + "1");
+        }
+    }     
 }
