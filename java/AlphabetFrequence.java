@@ -12,6 +12,7 @@ public class AlphabetFrequence {
     protected ArrayList<String> txtList;                // ~ ['b','o','n','j','u','r']
     protected ArrayList<Integer> freqList;              // ~ [ 1 , 2 , 1 , 1 , 1 , 1 ]
     protected LinkedHashMap<String, Integer> dicoFreq;  // ~ {b=1,j=1,n=1,r=1,u=1,o=2,}
+    
 
     public AlphabetFrequence(String txt){
         this.txt = txt;
@@ -107,5 +108,16 @@ public class AlphabetFrequence {
 
         // remplacer l'ancien dictionnaire par le nouveau dictionnaire trié
         dicoFreq = newDicoFreq;
+    }
+
+    public String codageTexte(LinkedHashMap<String, String> dicoCodeBinaire) {
+        String txtCode = "";
+        for (int i = 0; i < txt.length(); i++) {
+            char caractere = txt.charAt(i);
+            String caractereString = String.valueOf(caractere);
+            txtCode += dicoCodeBinaire.get(caractereString);
+            System.out.println(dicoCodeBinaire.get(caractereString));
+        }
+        return txtCode;
     }
 }

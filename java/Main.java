@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         //On récupère le contenu d'un fichier .txt pour le mettre dans un String 
-        String txt = LecteurFichierTexte.lireFichier("donnees\\txtTest.txt");
+        String txt = LecteurFichierTexte.lireFichier("donnees\\textesimple.txt");
         System.out.println(txt);
 
         AlphabetFrequence alpha = new AlphabetFrequence(txt);
@@ -28,5 +28,8 @@ public class Main {
         System.out.println(huffman.dicoCodeBinaire);
 
         System.out.println(huffman.arbreHuffman.filsGauche.freq);
+
+        String txtCode = alpha.codageTexte(huffman.dicoCodeBinaire);
+        System.out.println(txtCode);
     }   
 }
