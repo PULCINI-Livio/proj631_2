@@ -19,6 +19,11 @@ public class LecteurFichierTexte {
                 contenu.append(ligne).append("\n");
             }
 
+            // Supprimer le dernier caractère de nouvelle ligne s'il y en a un
+            if (contenu.length() > 0 && contenu.charAt(contenu.length() - 1) == '\n') {
+                contenu.setLength(contenu.length() - 1);
+            }
+
             // Fermer le scanner
             scanner.close();
         } catch (FileNotFoundException e) {
