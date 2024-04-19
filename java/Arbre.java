@@ -45,4 +45,8 @@ public class Arbre {
             filsDroit.afficherArbreASCII(nouveauPrefixe, "", false);
         }
     }
+
+    public boolean estFeuille() {
+        return (this.filsDroit == null && this.filsGauche == null);
+    }
 }
