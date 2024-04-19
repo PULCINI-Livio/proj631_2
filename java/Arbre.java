@@ -12,10 +12,10 @@ public class Arbre {
         this.freq = freq;
     }
 
-    public Arbre(int freq, Arbre filsDroit, Arbre filsGauche) {
+    public Arbre(int freq, Arbre filsGauche, Arbre filsDroit) {
         this.freq = freq;
-        this.filsDroit = filsDroit;
         this.filsGauche = filsGauche;
+        this.filsDroit = filsDroit;
     }   
 
     //Methods
