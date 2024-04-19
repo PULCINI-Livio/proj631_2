@@ -19,8 +19,30 @@ public class Arbre {
     }   
 
     //Methods
+    public void afficherArbre() {
+        System.out.println("Fréquence : " + freq + ", Caractère : " + car);
+        if (filsGauche != null) {
+            System.out.println("Fils gauche : ");
+            filsGauche.afficherArbre();
+        }
+        if (filsDroit != null) {
+            System.out.println("Fils droit : ");
+            filsDroit.afficherArbre();
+        }
+    }
 
-    public void createListeFeuille(LinkedHashMap<String, Integer> dicoFreq) {
+    public void afficherArbreASCII() {
+        afficherArbreASCII("", "", false);
+    }
 
+    private void afficherArbreASCII(String prefixe, String suffixe, boolean estFilsDroit) {
+        System.out.println(prefixe + (estFilsDroit ? "├── " : "└── ") + car + " (" + freq + ")");
+        String nouveauPrefixe = prefixe + (estFilsDroit ? "│   " : "    ");
+        if (filsGauche != null) {
+            filsGauche.afficherArbreASCII(nouveauPrefixe, "", true);
+        }
+        if (filsDroit != null) {
+            filsDroit.afficherArbreASCII(nouveauPrefixe, "", false);
+        }
     }
 }
