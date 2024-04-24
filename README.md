@@ -10,7 +10,7 @@ que soit connues (ou estimées) les fréquences d’apparition des différents s
 ainsi plusieurs variantes de l’algorithme de Huffman (statique, semi-adaptatif ou adaptatif)
 aujourd’hui utilisées dans des algorithmes de compression de fichiers tels que gzip.
 
-Le sujet est également disponible [Sujet_codage_Huffman.pdf](Sujet codage Huffman.pdf)
+Le sujet est également disponible [Sujet_codage_Huffman.pdf](Sujet_codage_Huffman.pdf)
 
 ## ASPECT TECHNIQUE
 Le programme se décompose en plusieurs parties:   
