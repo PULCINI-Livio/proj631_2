@@ -4,63 +4,20 @@ import java.util.*;
 import java.io.*;
 
 public class AlphabetFrequence {
-    protected String txt;                               // ~ 'bonjour'
-    protected ArrayList<String> choppedTxtList;         // ~ ['b','o','n','j','o','u','r']
-    protected ArrayList<String> txtList;                // ~ ['b','o','n','j','u','r']
-    protected ArrayList<Integer> freqList;              // ~ [ 1 , 2 , 1 , 1 , 1 , 1 ]
-    protected LinkedHashMap<String, Integer> dicoFreq;  // ~ {b=1,j=1,n=1,r=1,u=1,o=2,}
-    protected String cheminFichier;
-    protected String txtCode;
-    protected String txtCodeOpti8Bits;
-
-    public AlphabetFrequence(String txt, String unCheminFichier){
-        this.txt = txt;
-        this.choppedTxtList = new ArrayList<String>();
-        this.txtList = new ArrayList<String>();
-        this.freqList = new ArrayList<Integer>();
-        this.dicoFreq = new LinkedHashMap<String, Integer>();
-        this.cheminFichier = unCheminFichier;
-        this.txtCode = "";
-        this.txtCodeOpti8Bits = "";
-    }
-    
-    //Getters and Setters
-    public String getTxt() {
-        return this.txt;
-    }
-
-    public void setTxt(String new_txt) {
-        this.txt = new_txt;
-    }
-
-    public ArrayList<String> getChoppedTxtList() {
-        return this.choppedTxtList;
-    }
-
-    public void setChoppedTxtList(ArrayList<String> newChoppedTxtList) {
-        this.txtList = newChoppedTxtList;
-    }
-
-    public ArrayList<String> getTxtList() {
-        return this.txtList;
-    }
-
-    public void setTxtList(ArrayList<String> newTxtList) {
-        this.txtList = newTxtList;
-    }
-
-    public ArrayList<Integer> getFreqList() {
-        return this.freqList;
-    }
-
-    public void setFreqList(ArrayList<Integer> newFreqList) {
-        this.freqList = newFreqList;
-    }
- 
+    protected static String txt;                               // ~ 'bonjour'
+    protected static ArrayList<String> choppedTxtList;         // ~ ['b','o','n','j','o','u','r']
+    protected static ArrayList<String> txtList;                // ~ ['b','o','n','j','u','r']
+    protected static ArrayList<Integer> freqList;              // ~ [ 1 , 2 , 1 , 1 , 1 , 1 ]
+    protected static LinkedHashMap<String, Integer> dicoFreq;  // ~ {b=1,j=1,n=1,r=1,u=1,o=2,}
+    protected static String cheminFichier;
+    protected static String txtCode;
+    protected static String txtCodeOpti8Bits;
 
  
     //Methods
-    public void createChoppedTxtList() {
+    public static void createChoppedTxtList(String unTxt) {
+    txt = unTxt;
+    choppedTxtList = new ArrayList<String>();
     //hacher le txt en un char par elt de list (donc taille liste = taille du txt), avec des doublons
         for (int i = 0; i < txt.length(); i++) {
             char caractere = txt.charAt(i);
@@ -70,16 +27,16 @@ public class AlphabetFrequence {
         Collections.sort(choppedTxtList);//On trie la liste par ordre croissant
     }
 
-    public void createTxtList() {
+    public static void createTxtList() {
     //Une liste sans les doublons de choppedTxtList
         Set<String> hashTemp = new HashSet<String>(choppedTxtList);
         txtList = new ArrayList<String>(hashTemp);
     }
 
-    public void createFreqList() {
+    public static void createFreqList() {
         //comparer choppedTxtList et txtList pour avoir les fréquences (genre pour chaque str du 1er tu regarde 
         //le nb de fois que t'as le char ds le deuxieme)
-
+        freqList = new ArrayList<Integer>();
         for (String element : txtList) {
             int cpt = 0;
             for (int i = 0; i < choppedTxtList.size(); i++){
@@ -92,7 +49,8 @@ public class AlphabetFrequence {
     }
 
 
-    public void createDicoFreq() {
+    public static void createDicoFreq() {
+        dicoFreq = new LinkedHashMap<String, Integer>();
         for (int i = 0; i < txtList.size(); i++){
             dicoFreq.put(txtList.get(i),freqList.get(i));
         }
@@ -112,16 +70,17 @@ public class AlphabetFrequence {
         dicoFreq = newDicoFreq;
     }
 
-    public void codageTexte(LinkedHashMap<String, String> dicoCodeBinaire) {
+    public static void codageTexte(LinkedHashMap<String, String> dicoCodeBinaire) {
+        txtCode = "";
         for (int i = 0; i < txt.length(); i++) {
             char caractere = txt.charAt(i);
             String caractereString = String.valueOf(caractere);
             txtCode += dicoCodeBinaire.get(caractereString);
-            //System.out.println(dicoCodeBinaire.get(caractereString));
         }
     }
 
-    public void creerFichierFreq() {
+    public static void creerFichierFreq() {
+        cheminFichier = LecteurFichierTexte.cheminFichier;
         int tailleAlphabet = txtList.size();
         String nomFichier = cheminFichier.substring(0, cheminFichier.length() - 4)+"_freq.txt";
         
@@ -140,7 +99,19 @@ public class AlphabetFrequence {
     }
 
 
-    public void creerFichierCompression() throws FileNotFoundException, IOException {
+    
+
+    public static String sur8Bits() {
+        txtCodeOpti8Bits = txtCode;
+        int reste = txtCodeOpti8Bits.length() % 8;
+        
+        for (int index = 0; index < 8-reste; index++) {
+            txtCodeOpti8Bits += "0";
+        }
+        return txtCodeOpti8Bits;
+    }
+    
+    public static void creerFichierCompression() throws FileNotFoundException, IOException {
         String nomFichier = cheminFichier.substring(0, cheminFichier.length() - 4)+"_comp.bin";
         
         try {
@@ -164,17 +135,7 @@ public class AlphabetFrequence {
         
     }
 
-    public String sur8Bits() {
-        txtCodeOpti8Bits = txtCode;
-        int reste = txtCodeOpti8Bits.length() % 8;
-        
-        for (int index = 0; index < 8-reste; index++) {
-            txtCodeOpti8Bits += "0";
-        }
-        return txtCodeOpti8Bits;
-    }
-
-    public void tauxCompression() {
+    public static void tauxCompression() {
         File initFile = new File(cheminFichier);
         File compressFile = new File(cheminFichier.substring(0, cheminFichier.length() - 4)+"_comp.bin");
 
@@ -191,7 +152,7 @@ public class AlphabetFrequence {
         }
     }
 
-    public void nbMoyenBitsParCar() {
+    public static void nbMoyenBitsParCar() {
         float avgBitsPerChar = (float) txtCode.length() / (float) txt.length();
         System.out.println("Nombre moyen de bits de stockage d’un caractère du texte compressé: " + avgBitsPerChar);
     }

@@ -1,6 +1,5 @@
 package java_1;
-import java.util.Comparator;
-import java.util.Map;
+import java.util.*;
 
 public class ValueThenKeyComparator<K extends Comparable<? super K>, V extends Comparable<? super V>> implements Comparator<Map.Entry<K, V>> {
 

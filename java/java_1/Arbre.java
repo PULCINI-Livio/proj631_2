@@ -1,6 +1,5 @@
 package java_1;
 
-
 public class Arbre {
     protected int freq;
     protected String car;

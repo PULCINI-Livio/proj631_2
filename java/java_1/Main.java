@@ -5,43 +5,44 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        String cheminFichier = "donnees\\alice.txt";
+        String cheminFichier = "donnees\\extraitalice.txt";
 
         //On récupère le contenu d'un fichier .txt pour le mettre dans un String 
         String txt = LecteurFichierTexte.lireFichier(cheminFichier);
-        System.out.println(txt);
+        //System.out.println(txt);
 
-        AlphabetFrequence alpha = new AlphabetFrequence(txt, cheminFichier);
-        alpha.createChoppedTxtList();
-        //System.out.println(alpha.choppedTxtList);
+        
+        AlphabetFrequence.createChoppedTxtList(txt);
+        //System.out.println(AlphabetFrequence.choppedTxtList);
 
-        alpha.createTxtList();
-        //System.out.println(alpha.txtList);
+        AlphabetFrequence.createTxtList();
+        //System.out.println(AlphabetFrequence.txtList);
 
-        alpha.createFreqList();
-        //System.out.println(alpha.freqList);
+        AlphabetFrequence.createFreqList();
+        //System.out.println(AlphabetFrequence.freqList);
 
-        alpha.createDicoFreq();
-        System.out.println(alpha.dicoFreq);
+        AlphabetFrequence.createDicoFreq();
+        //System.out.println(AlphabetFrequence.dicoFreq);
    
-        ConstructionArbre huffman = new ConstructionArbre(alpha.dicoFreq);
+        ConstructionArbre huffman = new ConstructionArbre(AlphabetFrequence.dicoFreq);
         //System.out.println(huffman.listeArbres);
         huffman.construireArbre();
-        System.out.println(huffman.arbreHuffman);
-        huffman.arbreHuffman.afficherArbreASCII();  
+        //System.out.println(huffman.arbreHuffman);
+        //huffman.arbreHuffman.afficherArbreASCII();  
 
         String code = "";
         huffman.creerCodeBinaire(huffman.arbreHuffman, code);
         System.out.println(huffman.dicoCodeBinaire);
 
-        alpha.codageTexte(huffman.dicoCodeBinaire);
-        System.out.println(alpha.txtCode);
+        AlphabetFrequence.codageTexte(huffman.dicoCodeBinaire);
+        System.out.println(AlphabetFrequence.txtCode);
         
-        
-        alpha.creerFichierFreq();
-        alpha.sur8Bits();
-        alpha.creerFichierCompression();
-        alpha.tauxCompression();
-        alpha.nbMoyenBitsParCar();
+        //AlphabetFrequence.creerFichierFreq();
+        //AlphabetFrequence.creerFichierCompression();
+       
+        AlphabetFrequence.sur8Bits();
+        AlphabetFrequence.creerFichierCompression();
+        AlphabetFrequence.tauxCompression();
+        AlphabetFrequence.nbMoyenBitsParCar();
     }   
 }

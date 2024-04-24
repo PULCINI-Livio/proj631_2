@@ -1,12 +1,14 @@
 package java_1;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 
 public class LecteurFichierTexte {
+    protected static String cheminFichier;
 
-    public static String lireFichier(String cheminFichier) {
+    public static String lireFichier(String unCheminFichier) {
+        cheminFichier = unCheminFichier;
+        AlphabetFrequence.cheminFichier = cheminFichier;
         StringBuilder contenu = new StringBuilder();
 
         File fichier = new File(cheminFichier);
