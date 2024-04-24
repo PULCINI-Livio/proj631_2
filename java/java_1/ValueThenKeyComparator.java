@@ -14,5 +14,4 @@ public class ValueThenKeyComparator<K extends Comparable<? super K>, V extends C
             return a.getKey().compareTo(b.getKey());
         }
     }
-
 }

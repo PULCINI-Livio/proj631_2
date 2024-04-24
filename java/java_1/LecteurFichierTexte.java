@@ -1,7 +1,7 @@
 package java_1;
 
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 /** 
 * Permet de lire un fichier à partir de son chemin relatif
