@@ -1,8 +1,13 @@
 package java_1;
+
 import java.io.*;
 import java.util.Scanner;
 
-
+/** 
+* Permet de lire un fichier à partir de son chemin relatif
+*renvoie le tout dans un String
+* (en collaboration avec Le Chat Mistral)
+*/
 public class LecteurFichierTexte {
     protected static String cheminFichier;
 

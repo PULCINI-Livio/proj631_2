@@ -5,28 +5,18 @@ import java.util.Map;
 
 
 public class ConstructionArbre {
+    // Attributes
     protected LinkedHashMap<String, Integer> dicoFreq;
     protected ArrayList<Arbre> listeArbres;
     protected Arbre arbreHuffman;
     protected LinkedHashMap<String, String> dicoCodeBinaire;
     
 
+    // Getters and setters
 
-    public ConstructionArbre(LinkedHashMap<String, Integer> dicoFreq) {
-        this.dicoFreq = dicoFreq;
-        this.listeArbres = new ArrayList<Arbre>();
-        creerListeArbres();
-        this.dicoCodeBinaire = new LinkedHashMap<String, String>();
-        initDicoCodeBinaire();
-    }
-
-    public void initDicoCodeBinaire() { 
-        for (Map.Entry<String, Integer> entry : dicoFreq.entrySet()) {
-            String key = entry.getKey();
-            dicoCodeBinaire.put(key, null);
-        }
-    }
-
+    /** 
+     * @return LinkedHashMap<String, Integer>
+     */
     public LinkedHashMap<String, Integer> getDicoFreq() {
         return dicoFreq;
     }
@@ -43,8 +33,34 @@ public class ConstructionArbre {
         this.listeArbres = listeArbres;
     }
 
-    public void creerListeArbres() {
-        // Parcours du dictionnaire dicoFreq pour remplir la liste de feuilles
+    // Constructeur
+
+    /**
+     * Initialise également certains attributs
+     * @param dicoFreq
+     *      le dictionnaire des caractères et leur fréquence
+    */
+    public ConstructionArbre(LinkedHashMap<String, Integer> dicoFreq) {
+        this.dicoFreq = dicoFreq;
+        this.listeArbres = new ArrayList<Arbre>();
+        creerListeArbres();
+        this.dicoCodeBinaire = new LinkedHashMap<String, String>();
+        initDicoCodeBinaire();
+    }
+
+    public void initDicoCodeBinaire() { 
+        for (Map.Entry<String, Integer> entry : dicoFreq.entrySet()) {
+            String key = entry.getKey();
+            dicoCodeBinaire.put(key, null);
+        }
+    }
+
+    
+
+    /** 
+     * Parcours le dictionnaire dicoFreq pour remplir la liste avec des feuilles
+     */
+    public void creerListeArbres() { 
         for (Map.Entry<String, Integer> entry : dicoFreq.entrySet()) {
             String car = entry.getKey();
             Integer valeur = entry.getValue();
@@ -52,6 +68,11 @@ public class ConstructionArbre {
         }
     }
 
+    /*
+     * Construit l'arbre de Huffman de manière récursive à partir de la liste d'arbres triée
+     * Le fait que la liste soit trié même après la création d'un nouvelle arbre
+     * permet de toujours sélectionner les deux premiers arbres
+    */
     public void construireArbre() {
         if (listeArbres.size() == 1) { // si il ne reste plus que la racine dans la liste d'arbre
             //System.out.println("bonjour");
@@ -72,9 +93,13 @@ public class ConstructionArbre {
         }
     }
 
+    /**
+     * Ajoute tree dans listeArbres qui est trié par fréquence, si il y a égalité tree sera ajouté après
+     * @param tree
+     *      l'arbre à ajouter dans la liste
+    */
     public void ajouterArbreDansListeArbres(Arbre tree) {
-        // ajoute tree dans la listeArbres trié par fréquence, 
-        // si il y a égalité tree sera ajouté après 
+        
         int i=0;
         boolean fini=false;
         float supFreq = tree.freq + 0.5f; // si il y a égalité tree sera ajouté après
@@ -93,12 +118,16 @@ public class ConstructionArbre {
     }
 
 
-    /*def codeBinaire(arbre, dico, code=""):
-        if arbre.estFeuille():
-            dico[arbre.getCaractere()] = code
-        else :
-            codeBinaire(arbre.getGauche(), dico, code + "0")
-            codeBinaire(arbre.getDroite(), dico, code + "1")   */
+    /**
+     * Remplie dicoCodeBinaire en parcourant récursivement l'arbre de Huffman en ajoutant 0 pour les branches gauche 
+     * et 1 pour celles de droite, quand il arrive sur une feuille il ajoute code dans le dictionnaire au caractère de la feuille
+     * 
+     * @param arbre
+     *      l'arbre de Huffman
+     * @param code
+     *      le code de chaque feuille
+     * 
+    */
     
     public void creerCodeBinaire(Arbre arbre, String code) {
         if (arbre.estFeuille()) {
