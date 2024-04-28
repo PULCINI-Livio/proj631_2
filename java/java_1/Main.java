@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        String cheminFichier = "donnees\\extraitalice.txt";
+        String cheminFichier = "donnees\\alice.txt";
 
         //On récupère le contenu d'un fichier .txt pour le mettre dans un String 
         String txt = LecteurFichierTexte.lireFichier(cheminFichier);

@@ -83,7 +83,8 @@ public class ConstructionArbre {
             int sommeFreq = first.freq + second.freq;
             
             Arbre newTree = new Arbre(sommeFreq, first, second);
-            ajouterArbreDansListeArbres(newTree);
+            //ajouterArbreDansListeArbres(newTree);
+            ajouterArbreDansListeArbresBIS(newTree);
             listeArbres.remove(first);
             listeArbres.remove(second);
             
@@ -108,6 +109,25 @@ public class ConstructionArbre {
                 fini = true;
                 listeArbres.add(tree);
             } else if (supFreq > listeArbres.get(i).freq && supFreq < listeArbres.get(i+1).freq ) { // deux condition pour bien placer tree en dernier des arbre de meme fréquence
+                fini = true;
+                listeArbres.add(i+1, tree);
+            }
+            i++;
+        }
+    }
+
+    public void ajouterArbreDansListeArbresBIS(Arbre tree) {
+        
+        int i=0;
+        boolean fini=false;
+        float subFreq = tree.freq - 0.5f; // si il y a égalité tree sera ajouté avant
+        
+        while (i<listeArbres.size() && !fini) {
+            
+            if (subFreq > listeArbres.get(i).freq && i == listeArbres.size()-1  ) { // tree 
+                fini = true;
+                listeArbres.add(tree);
+            } else if (subFreq > listeArbres.get(i).freq && subFreq < listeArbres.get(i+1).freq ) { // deux condition pour bien placer tree en dernier des arbre de meme fréquence
                 fini = true;
                 listeArbres.add(i+1, tree);
             }
