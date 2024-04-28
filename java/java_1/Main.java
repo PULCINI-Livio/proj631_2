@@ -22,7 +22,7 @@ public class Main {
         huffman.construireArbre();
         //System.out.println(huffman.arbreHuffman);
         huffman.arbreHuffman.afficherArbreASCII();  
-        huffman.arbreHuffman.afficherArbre();
+        //huffman.arbreHuffman.afficherArbre();
 
         String code = "";
         huffman.creerCodeBinaire(huffman.arbreHuffman, code);
@@ -31,7 +31,7 @@ public class Main {
         AlphabetFrequence.codageTexte(huffman.dicoCodeBinaire);
         //System.out.println(AlphabetFrequence.txtCode);
         
-       
+        AlphabetFrequence.creerFichierFreq();
         AlphabetFrequence.sur8Bits();
         AlphabetFrequence.creerFichierCompression();
         AlphabetFrequence.tauxCompression();

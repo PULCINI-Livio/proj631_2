@@ -24,7 +24,7 @@ public class AlphabetFrequence {
         AlphabetFrequence.createChoppedTxtList(unTxt);
         AlphabetFrequence.createTxtList();
         AlphabetFrequence.createFreqList();
-        AlphabetFrequence.createDicoFreq();;
+        AlphabetFrequence.createDicoFreq();
 
     }
 
