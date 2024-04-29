@@ -4,6 +4,7 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException {
+        //Remplacer le nom du fichier dans la ligne suivante:
         String cheminFichier = "donnees\\alice.txt";
 
         //On récupère le contenu d'un fichier .txt pour le mettre dans un String 
@@ -29,10 +30,12 @@ public class Main {
         //System.out.println(huffman.dicoCodeBinaire);
 
         AlphabetFrequence.codageTexte(huffman.dicoCodeBinaire);
-        System.out.println(AlphabetFrequence.txtCode);
+        //System.out.println(AlphabetFrequence.txtCode);
         
         AlphabetFrequence.creerFichierFreq();
         AlphabetFrequence.sur8Bits();
+        //System.out.println(AlphabetFrequence.txtCode);
+        System.out.println(AlphabetFrequence.txtCodeOpti8Bits);
         AlphabetFrequence.creerFichierCompression();
         AlphabetFrequence.tauxCompression();
         AlphabetFrequence.nbMoyenBitsParCar();
