@@ -186,10 +186,14 @@ public class AlphabetFrequence {
     public static void tauxCompression() {
         File initFile = new File(cheminFichier);
         File compressFile = new File(cheminFichier.substring(0, cheminFichier.length() - 4)+"_comp.bin");
+        File freqFile = new File(cheminFichier.substring(0, cheminFichier.length() - 4)+"_freq.txt");
 
-        if (initFile.exists() && compressFile.exists()) {
+        if (initFile.exists() && compressFile.exists() && freqFile.exists()) {
+            
             float initSizeInBytes = initFile.length();
-            float compressSizeInBytes = compressFile.length();
+            System.out.println(initSizeInBytes);
+            float compressSizeInBytes = compressFile.length() + freqFile.length();
+            System.out.println(compressSizeInBytes);
             float tauxComp = (1 - (compressSizeInBytes/initSizeInBytes)) * 100;
             System.out.println("Taux de compression : " + tauxComp + "%");
         } else {

@@ -29,7 +29,7 @@ public class Main {
         //System.out.println(huffman.dicoCodeBinaire);
 
         AlphabetFrequence.codageTexte(huffman.dicoCodeBinaire);
-        //System.out.println(AlphabetFrequence.txtCode);
+        System.out.println(AlphabetFrequence.txtCode);
         
         AlphabetFrequence.creerFichierFreq();
         AlphabetFrequence.sur8Bits();
